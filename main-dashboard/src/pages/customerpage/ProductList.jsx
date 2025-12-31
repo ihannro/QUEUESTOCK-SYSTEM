@@ -36,10 +36,15 @@ export default function ProductList() {
   const [amount, setAmount] = useState(0); 
   const [change, setChange] = useState(0); 
 
+  // Calculate change whenever amount or quantity changes
+  useEffect(() => {
+    const totalPrice = calculateTotalPrice();
+    setChange(amount - totalPrice);
+  }, [amount, quantity, selectedProduct]);
+
   const handleAmountChange = (e) => {
     const inputAmount = parseFloat(e.target.value) || 0;
     setAmount(inputAmount);
-    setChange(inputAmount - calculateTotalPrice());
   };
 
   const fetchProducts = async () => {
@@ -70,9 +75,36 @@ export default function ProductList() {
   const handleAddOrder = async () => {
     try {
       const customerName = localStorage.getItem('userName');
+      const totalPrice = calculateTotalPrice();
       
       if (!customerName) {
         setError('Please login again');
+        return;
+      }
+
+      // Validation checks
+      if (!quantity || quantity < 1) {
+        setError('Please enter a valid quantity (minimum 1)');
+        return;
+      }
+
+      if (!amount || amount <= 0) {
+        setError('Please enter a valid amount');
+        return;
+      }
+
+      if (amount < totalPrice) {
+        setError(`Insufficient amount. Total price is ₱${totalPrice}`);
+        return;
+      }
+
+      if (deliveryMethod === 'Dine-in' && !tableNumber) {
+        setError('Please enter a table number for Dine-in');
+        return;
+      }
+
+      if (deliveryMethod === 'To be Delivered' && !deliveryAddress) {
+        setError('Please enter a delivery address');
         return;
       }
 
@@ -81,7 +113,7 @@ export default function ProductList() {
         product_name: selectedProduct.product_name,
         product_price: selectedProduct.product_price,
         quantity,
-        total_price: quantity * selectedProduct.product_price,
+        total_price: totalPrice,
         delivery_method: deliveryMethod,
         table_number: deliveryMethod === 'Dine-in' ? tableNumber : null,
         delivery_address: deliveryMethod === 'To be Delivered' ? deliveryAddress : null,
@@ -248,9 +280,13 @@ export default function ProductList() {
           onClick={handleAddOrder}
           variant="contained"
           disabled={
+            !quantity || 
+            quantity < 1 ||
+            !amount || 
+            amount <= 0 ||
+            amount < calculateTotalPrice() ||
             (deliveryMethod === 'Dine-in' && !tableNumber) ||
-            (deliveryMethod === 'To be Delivered' && !deliveryAddress) ||
-            amount < calculateTotalPrice() 
+            (deliveryMethod === 'To be Delivered' && !deliveryAddress)
           }
         >
           Add Order
