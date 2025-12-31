@@ -2,11 +2,12 @@
     background-color: #fff;
     width: 100vw;
     height: 100vh;
-    overflow-y: auto;
+    overflow: hidden;
     box-sizing: border-box;
-    padding-top: 15vh;
-    padding-left: 2rem;
-    padding-right: 2rem;
+    padding-top: 12vh;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    padding-bottom: 0;
     display: flex;
     flex-direction: column;
     color: #000;
@@ -14,4 +15,169 @@
 
 .customer-order-box {
     max-width: 100%;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+    flex: 1;
 }
+
+/* Delivered Orders Audit Table Styling */
+.customer-order-box h2 {
+    font-size: 1rem;
+    font-weight: 700;
+    margin: 0;
+    padding: 0.8rem 0.8rem 0.5rem 0;
+    border-radius: 0;
+    display: block;
+    width: 100%;
+    color: #333;
+    background-color: transparent;
+    border-bottom: 3px solid #333;
+    letter-spacing: 0.5px;
+}
+
+.customer-order-box h2:first-of-type {
+    background-color: transparent;
+    color: #333;
+    border-bottom-color: #333;
+}
+
+.customer-order-box h2:last-of-type {
+    background-color: transparent;
+    color: #333;
+    border-bottom-color: #333;
+}
+
+/* Section wrapper for each table and pagination */
+.customer-order-box > section {
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Table Container */
+.customer-order-box > div {
+    overflow: hidden;
+    border-radius: 0;
+    border: 1px solid #ddd;
+    max-height: fit-content;
+}
+
+/* Table Styling */
+.customer-order-box table {
+    font-size: 0.75rem;
+    border-collapse: collapse;
+}
+
+/* Pending Orders Table Header */
+.customer-order-box table:first-of-type thead {
+    background-color: #fff;
+    color: #333;
+}
+
+.customer-order-box table:first-of-type thead th {
+    font-weight: 600;
+    padding: 0.5rem !important;
+    border-bottom: 1px solid #ddd !important;
+    color: #333;
+}
+
+/* Pending Orders Table Body */
+.customer-order-box table:first-of-type tbody tr {
+    border-bottom: 1px solid #f0f0f0;
+    transition: background-color 0.2s ease;
+}
+
+.customer-order-box table:first-of-type tbody tr:hover {
+    background-color: #f9f9f9 !important;
+}
+
+.customer-order-box table:first-of-type tbody td {
+    padding: 0.4rem !important;
+}
+
+/* Delivered Orders Table Header */
+.customer-order-box table:last-of-type thead {
+    background-color: #e8f5e9;
+    color: #333;
+}
+
+.customer-order-box table:last-of-type thead th {
+    font-weight: 600;
+    padding: 0.5rem !important;
+    border-bottom: 1px solid #c8e6c9 !important;
+    color: #333;
+}
+
+/* Delivered Orders Table Body */
+.customer-order-box table:last-of-type tbody tr {
+    background-color: #f1f8f6 !important;
+    border-bottom: 1px solid #e0f2f1;
+    transition: background-color 0.2s ease;
+}
+
+.customer-order-box table:last-of-type tbody tr:hover {
+    background-color: #e8f5e9 !important;
+}
+
+.customer-order-box table:last-of-type tbody td {
+    padding: 0.4rem !important;
+}
+
+/* Button Styling */
+.customer-order-box button {
+    padding: 0.3rem 0.6rem !important;
+    font-size: 0.65rem !important;
+    font-weight: 600;
+    border-radius: 4px !important;
+    transition: all 0.2s ease;
+}
+
+.customer-order-box button:not(:disabled):hover {
+    transform: translateY(-1px);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1) !important;
+}
+
+.customer-order-box button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+/* Status Badge Styling */
+.customer-order-box span[style*="padding"] {
+    border-radius: 4px !important;
+    font-weight: 600 !important;
+    display: inline-block;
+    padding: 0.25rem 0.5rem !important;
+    font-size: 0.65rem !important;
+}
+
+/* Pagination Styling */
+.customer-order-box nav {
+    border: none !important;
+    box-shadow: none !important;
+}
+
+.customer-order-box nav ul {
+    gap: 0.2rem !important;
+    border: none !important;
+}
+
+.customer-order-box nav button {
+    min-width: 28px !important;
+    height: 28px !important;
+    padding: 0 !important;
+    border-radius: 4px !important;
+    font-weight: 600;
+    font-size: 0.75rem !important;
+    border: none !important;
+}
+}
+
+.customer-order-box nav button.Mui-selected {
+    background-color: #1976d2 !important;
+    color: #fff !important;
+}
+
+
